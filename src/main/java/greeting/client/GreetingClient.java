@@ -23,7 +23,7 @@ public class GreetingClient {
             System.out.println(response.getResult());
         });
     }
-
+    //test
     public static void main(String[] args) {
 
         if(args.length ==0) {
