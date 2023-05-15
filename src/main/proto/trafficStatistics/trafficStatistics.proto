@@ -1,0 +1,19 @@
+syntax = 'proto3';
+
+package trafficStatistics;
+
+option java_package = "com.proto.trafficStatistics";
+option java_multiple_files = true;
+
+message StatsRequest {
+    string subscription_Path = 1;
+
+}
+
+message StatsResponse {
+  string result = 1;
+}
+service subscribeService {
+  rpc subscribe(StatsRequest) returns (stream StatsResponse);
+}
+
