@@ -30,6 +30,8 @@ protobuf {
 sourceSets.main.java.srcDir new File(buildDir, 'generated/source')
 
 dependencies {
+    implementation 'org.testng:testng:7.1.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     runtimeOnly 'io.grpc:grpc-netty-shaded:1.54.1'
     implementation 'io.grpc:grpc-protobuf:1.54.1'
     implementation 'io.grpc:grpc-stub:1.54.1'
