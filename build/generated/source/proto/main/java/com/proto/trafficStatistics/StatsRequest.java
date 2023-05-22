@@ -47,10 +47,6 @@ private static final long serialVersionUID = 0L;
   public static final int SUBSCRIPTION_PATH_FIELD_NUMBER = 1;
   private volatile java.lang.Object subscriptionPath_;
   /**
-   * <pre>
-   *  string first_name = 1;
-   * </pre>
-   *
    * <code>string subscription_Path = 1;</code>
    * @return The subscriptionPath.
    */
@@ -68,10 +64,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   *  string first_name = 1;
-   * </pre>
-   *
    * <code>string subscription_Path = 1;</code>
    * @return The bytes for subscriptionPath.
    */
@@ -407,10 +399,6 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object subscriptionPath_ = "";
     /**
-     * <pre>
-     *  string first_name = 1;
-     * </pre>
-     *
      * <code>string subscription_Path = 1;</code>
      * @return The subscriptionPath.
      */
@@ -427,10 +415,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string first_name = 1;
-     * </pre>
-     *
      * <code>string subscription_Path = 1;</code>
      * @return The bytes for subscriptionPath.
      */
@@ -448,10 +432,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     *  string first_name = 1;
-     * </pre>
-     *
      * <code>string subscription_Path = 1;</code>
      * @param value The subscriptionPath to set.
      * @return This builder for chaining.
@@ -467,10 +447,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     *  string first_name = 1;
-     * </pre>
-     *
      * <code>string subscription_Path = 1;</code>
      * @return This builder for chaining.
      */
@@ -481,10 +457,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     *  string first_name = 1;
-     * </pre>
-     *
      * <code>string subscription_Path = 1;</code>
      * @param value The bytes for subscriptionPath to set.
      * @return This builder for chaining.

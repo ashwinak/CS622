@@ -20,10 +20,9 @@ public class clientSubscribe {
     public static void SubscribeRequest(ManagedChannel channel) {
         System.out.println("Enter from the following topics to subscribe: \n" +
                 "1) Traffic statistics: \n" +
-                "2) Health of the System: \n" +
-                "3) Uptime of the System \n" +
-                "4) Check server capability \n" +
-                "5) Check active subscription \n" +
+                "2) Check Server Health: \n" +
+                "3) Check Server capability \n" +
+                "4) Check Active subscription \n" +
                 "Enter your choice: ");
         Scanner inp = new Scanner(System.in);
         int option = inp.nextInt();

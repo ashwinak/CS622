@@ -8,19 +8,11 @@ public interface StatsRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <pre>
-   *  string first_name = 1;
-   * </pre>
-   *
    * <code>string subscription_Path = 1;</code>
    * @return The subscriptionPath.
    */
   java.lang.String getSubscriptionPath();
   /**
-   * <pre>
-   *  string first_name = 1;
-   * </pre>
-   *
    * <code>string subscription_Path = 1;</code>
    * @return The bytes for subscriptionPath.
    */

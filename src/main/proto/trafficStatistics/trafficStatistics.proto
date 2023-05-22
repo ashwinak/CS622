@@ -6,7 +6,7 @@ option java_package = "com.proto.trafficStatistics";
 option java_multiple_files = true;
 
 message StatsRequest {
-    string subscription_Path = 1;
+  string subscription_Path = 1;
 
 }
 
@@ -16,4 +16,3 @@ message StatsResponse {
 service subscribeService {
   rpc subscribe(StatsRequest) returns (stream StatsResponse);
 }
-
