@@ -9,10 +9,21 @@ message StatsRequest {
   string subscription_Path = 1;
 
 }
-
 message StatsResponse {
   string result = 1;
 }
 service subscribeService {
   rpc subscribe(StatsRequest) returns (stream StatsResponse);
 }
+
+message SysHealthRequest {
+  string subscription_Path = 1;
+
+}
+message SysHealthResponse {
+  string result = 1;
+}
+service SysHealthService {
+  rpc subscribe(SysHealthRequest) returns (stream SysHealthResponse);
+}
+

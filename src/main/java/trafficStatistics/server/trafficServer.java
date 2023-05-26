@@ -6,10 +6,11 @@ import java.io.IOException;
 
 public class trafficServer {
     public static void main(String[] args) throws IOException, InterruptedException {
-        int port = 50052;
+        int port = 50051;
         Server server = ServerBuilder
                 .forPort(port)
                 .addService(new trafficServerImpl())
+                .addService(new trafficServerImpl.SysHealthService())
                 .build();
 
         server.start();
@@ -20,7 +21,6 @@ public class trafficServer {
             System.out.println("Received shutdown request");
             server.shutdown();
             System.out.println("Server Stopped");
-
         }));
 
         server.awaitTermination();

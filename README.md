@@ -33,3 +33,52 @@ Enter your choice:
 Test Passed.
 Process finished with exit code 0
 ```
+
+# Step 4 : Execute as a JAR file
+
+```
+ashwinak@ashwinak-u2:~$ java -jar '/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/out/artifacts/gRPC_Project_jar/gRPC-Project.jar' 
+Enter from the following topics to subscribe: 
+1) Stream Traffic statistics: 
+2) Stream System Health:  
+3) Stream Common Friends in FB Acct: 
+4) Stream Weather Information: 
+5) Stream Flight Status: 
+Enter your choice: 
+1
+#### Subscription Topic is: r1/openconfig/interfaces/interface/state
+
+File write failed, if executing as JAR file this is expected.
+
+[{openconfig/interfaces/interface/state/r1/aggregate=1tbps}, {openconfig/interfaces/interface/state/r1/aggregate=2tbps}, {openconfig/interfaces/interface/state/r1/aggregate=3tbps}, {openconfig/interfaces/interface/state/r1/aggregate=4tbps}, {openconfig/interfaces/interface/state/r1/aggregate=5tbps}, {openconfig/interfaces/interface/state/r1/aggregate=6tbps}, {openconfig/interfaces/interface/state/r1/aggregate=7tbps}, {openconfig/interfaces/interface/state/r1/aggregate=8tbps}, {openconfig/interfaces/interface/state/r1/aggregate=9tbps}, {openconfig/interfaces/interface/state/r1/aggregate=10tbps}]
+### Implementing Down Casting
+Printing all topic schemas supported by Server
+### Polymorphic - > Many Forms
+The topic most subscribed by the client
+The topic having the longest run time
+Shutting Down
+ashwinak@ashwinak-u2:~$ java -jar '/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/out/artifacts/gRPC_Project_jar/gRPC-Project.jar' 
+Enter from the following topics to subscribe: 
+1) Stream Traffic statistics: 
+2) Stream System Health:  
+3) Stream Common Friends in FB Acct: 
+4) Stream Weather Information: 
+5) Stream Flight Status: 
+Enter your choice: 
+2
+#### Subscription topic is : System Health
+
+File write failed, if executing as JAR file this is expected.
+
+[{CPU_Usage=35%}, {Memory_Usage=44%}, {System_State=Good}, {System_Capacity=115tbps}, {System_Availability=60% Available}]
+### Implementing Down Casting
+Printing all topic schemas supported by Server
+### Polymorphic - > Many Forms
+The topic most subscribed by the client
+The topic having the longest run time
+Shutting Down
+ashwinak@ashwinak-u2:~$ 
+
+
+
+```

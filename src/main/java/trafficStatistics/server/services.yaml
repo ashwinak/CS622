@@ -1,0 +1,26 @@
+TrafficStatsService:
+                  - openconfig/interfaces/interface/state/r1/aggregate : 1tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 2tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 3tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 4tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 5tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 6tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 7tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 8tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 9tbps
+                  - openconfig/interfaces/interface/state/r1/aggregate : 10tbps
+
+SysHealthService:
+                - CPU_Usage : 35%
+                - Memory_Usage : 44%
+                - System_State : Good
+                - System_Capacity : 115tbps
+                - System_Availability: 60% Available
+
+CommonFriendsInFB:
+
+
+WeatherInformation:
+
+
+FlightStatus:

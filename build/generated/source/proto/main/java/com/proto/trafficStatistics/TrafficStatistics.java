@@ -24,6 +24,16 @@ public final class TrafficStatistics {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_trafficStatistics_StatsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_SysHealthRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_SysHealthRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_SysHealthResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_SysHealthResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -36,11 +46,15 @@ public final class TrafficStatistics {
       "\n)trafficStatistics/trafficStatistics.pr" +
       "oto\022\021trafficStatistics\")\n\014StatsRequest\022\031" +
       "\n\021subscription_Path\030\001 \001(\t\"\037\n\rStatsRespon" +
-      "se\022\016\n\006result\030\001 \001(\t2d\n\020subscribeService\022P" +
-      "\n\tsubscribe\022\037.trafficStatistics.StatsReq" +
-      "uest\032 .trafficStatistics.StatsResponse0\001" +
-      "B\037\n\033com.proto.trafficStatisticsP\001b\006proto" +
-      "3"
+      "se\022\016\n\006result\030\001 \001(\t\"-\n\020SysHealthRequest\022\031" +
+      "\n\021subscription_Path\030\001 \001(\t\"#\n\021SysHealthRe" +
+      "sponse\022\016\n\006result\030\001 \001(\t2d\n\020subscribeServi" +
+      "ce\022P\n\tsubscribe\022\037.trafficStatistics.Stat" +
+      "sRequest\032 .trafficStatistics.StatsRespon" +
+      "se0\0012l\n\020SysHealthService\022X\n\tsubscribe\022#." +
+      "trafficStatistics.SysHealthRequest\032$.tra" +
+      "fficStatistics.SysHealthResponse0\001B\037\n\033co" +
+      "m.proto.trafficStatisticsP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -57,6 +71,18 @@ public final class TrafficStatistics {
     internal_static_trafficStatistics_StatsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_trafficStatistics_StatsResponse_descriptor,
+        new java.lang.String[] { "Result", });
+    internal_static_trafficStatistics_SysHealthRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_trafficStatistics_SysHealthRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_SysHealthRequest_descriptor,
+        new java.lang.String[] { "SubscriptionPath", });
+    internal_static_trafficStatistics_SysHealthResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_trafficStatistics_SysHealthResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_SysHealthResponse_descriptor,
         new java.lang.String[] { "Result", });
   }
 
