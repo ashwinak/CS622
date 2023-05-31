@@ -34,6 +34,36 @@ public final class TrafficStatistics {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_trafficStatistics_SysHealthResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_QueryFullInventoryList_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_QueryFullInventoryList_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_FullInventoryListResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_FullInventoryListResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_QueryProductAvailability_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_QueryProductAvailability_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_ProductAvailabilityResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_ProductAvailabilityResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_QueryProductCostAndLeadTime_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_QueryProductCostAndLeadTime_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficStatistics_ProductCostAndLeadTimeResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficStatistics_ProductCostAndLeadTimeResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -48,13 +78,31 @@ public final class TrafficStatistics {
       "\n\021subscription_Path\030\001 \001(\t\"\037\n\rStatsRespon" +
       "se\022\016\n\006result\030\001 \001(\t\"-\n\020SysHealthRequest\022\031" +
       "\n\021subscription_Path\030\001 \001(\t\"#\n\021SysHealthRe" +
-      "sponse\022\016\n\006result\030\001 \001(\t2d\n\020subscribeServi" +
-      "ce\022P\n\tsubscribe\022\037.trafficStatistics.Stat" +
-      "sRequest\032 .trafficStatistics.StatsRespon" +
-      "se0\0012l\n\020SysHealthService\022X\n\tsubscribe\022#." +
-      "trafficStatistics.SysHealthRequest\032$.tra" +
-      "fficStatistics.SysHealthResponse0\001B\037\n\033co" +
-      "m.proto.trafficStatisticsP\001b\006proto3"
+      "sponse\022\016\n\006result\030\001 \001(\t\"3\n\026QueryFullInven" +
+      "toryList\022\031\n\021subscription_Path\030\001 \001(\t\"+\n\031F" +
+      "ullInventoryListResponse\022\016\n\006result\030\001 \001(\t" +
+      "\"5\n\030QueryProductAvailability\022\031\n\021subscrip" +
+      "tion_Path\030\001 \001(\t\"-\n\033ProductAvailabilityRe" +
+      "sponse\022\016\n\006result\030\001 \001(\t\"8\n\033QueryProductCo" +
+      "stAndLeadTime\022\031\n\021subscription_Path\030\001 \001(\t" +
+      "\"0\n\036ProductCostAndLeadTimeResponse\022\016\n\006re" +
+      "sult\030\001 \001(\t2d\n\020subscribeService\022P\n\tsubscr" +
+      "ibe\022\037.trafficStatistics.StatsRequest\032 .t" +
+      "rafficStatistics.StatsResponse0\0012l\n\020SysH" +
+      "ealthService\022X\n\tsubscribe\022#.trafficStati" +
+      "stics.SysHealthRequest\032$.trafficStatisti" +
+      "cs.SysHealthResponse0\0012{\n\021FullInventoryL" +
+      "ist\022f\n\tsubscribe\022).trafficStatistics.Que" +
+      "ryFullInventoryList\032,.trafficStatistics." +
+      "FullInventoryListResponse0\0012\201\001\n\023ProductA" +
+      "vailability\022j\n\tsubscribe\022+.trafficStatis" +
+      "tics.QueryProductAvailability\032..trafficS" +
+      "tatistics.ProductAvailabilityResponse0\0012" +
+      "\212\001\n\026ProductCostAndLeadTime\022p\n\tsubscribe\022" +
+      "..trafficStatistics.QueryProductCostAndL" +
+      "eadTime\0321.trafficStatistics.ProductCostA" +
+      "ndLeadTimeResponse0\001B\037\n\033com.proto.traffi" +
+      "cStatisticsP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -83,6 +131,42 @@ public final class TrafficStatistics {
     internal_static_trafficStatistics_SysHealthResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_trafficStatistics_SysHealthResponse_descriptor,
+        new java.lang.String[] { "Result", });
+    internal_static_trafficStatistics_QueryFullInventoryList_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_trafficStatistics_QueryFullInventoryList_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_QueryFullInventoryList_descriptor,
+        new java.lang.String[] { "SubscriptionPath", });
+    internal_static_trafficStatistics_FullInventoryListResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_trafficStatistics_FullInventoryListResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_FullInventoryListResponse_descriptor,
+        new java.lang.String[] { "Result", });
+    internal_static_trafficStatistics_QueryProductAvailability_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_trafficStatistics_QueryProductAvailability_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_QueryProductAvailability_descriptor,
+        new java.lang.String[] { "SubscriptionPath", });
+    internal_static_trafficStatistics_ProductAvailabilityResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_trafficStatistics_ProductAvailabilityResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_ProductAvailabilityResponse_descriptor,
+        new java.lang.String[] { "Result", });
+    internal_static_trafficStatistics_QueryProductCostAndLeadTime_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_trafficStatistics_QueryProductCostAndLeadTime_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_QueryProductCostAndLeadTime_descriptor,
+        new java.lang.String[] { "SubscriptionPath", });
+    internal_static_trafficStatistics_ProductCostAndLeadTimeResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_trafficStatistics_ProductCostAndLeadTimeResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficStatistics_ProductCostAndLeadTimeResponse_descriptor,
         new java.lang.String[] { "Result", });
   }
 

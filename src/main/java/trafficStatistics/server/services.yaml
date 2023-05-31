@@ -1,4 +1,4 @@
-TrafficStatsService:
+QueryTrafficStatistics:
                   - openconfig/interfaces/interface/state/r1/aggregate : 1tbps
                   - openconfig/interfaces/interface/state/r1/aggregate : 2tbps
                   - openconfig/interfaces/interface/state/r1/aggregate : 3tbps
@@ -10,17 +10,25 @@ TrafficStatsService:
                   - openconfig/interfaces/interface/state/r1/aggregate : 9tbps
                   - openconfig/interfaces/interface/state/r1/aggregate : 10tbps
 
-SysHealthService:
+QuerySystemHealth:
                 - CPU_Usage : 35%
                 - Memory_Usage : 44%
                 - System_State : Good
                 - System_Capacity : 115tbps
                 - System_Availability: 60% Available
 
-CommonFriendsInFB:
+QueryFullInventoryList:
+                - Router
+                - Server
+                - Switch
 
+QueryProductAvailability:
+                - Router : 200 Count
+                - Server : 75 Count
+                - Switch : 100 Count
 
-WeatherInformation:
+QueryProductCostAndLeadTime:
+                - Router : $1000 and 300 Days
+                - Switch : $500 and 250 Days
+                - Server : $150 and 100 Days
 
-
-FlightStatus:

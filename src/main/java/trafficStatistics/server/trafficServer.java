@@ -11,11 +11,15 @@ public class trafficServer {
                 .forPort(port)
                 .addService(new trafficServerImpl())
                 .addService(new trafficServerImpl.SysHealthService())
+                .addService(new trafficServerImpl.FullInventoryList())
+                .addService(new trafficServerImpl.ProductAvailability())
+                .addService(new trafficServerImpl.ProductCostAndLeadTime())
                 .build();
 
         server.start();
         System.out.println("Server Started");
         System.out.println("Listening on port: " + port);
+
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Received shutdown request");

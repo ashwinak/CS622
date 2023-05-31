@@ -21,75 +21,145 @@ public class clientSubscribe {
      *
      */
     public static void SubscribeRequest(ManagedChannel channel)  {
-        System.out.println("Enter from the following topics to subscribe: \n" +
-                "1) Stream Traffic statistics: \n" +
-                "2) Stream System Health:  \n" +
-                "3) Stream Common Friends in FB Acct: \n" +
-                "4) Stream Weather Information: \n" +
-                "5) Stream Flight Status: \n" +
-                "Enter your choice: ");
-        Scanner inp = new Scanner(System.in);
-        int option = inp.nextInt();
-        /**
-         *  The SaveLocation variable ensures all the file writes are happening at the same path without any error.
-         *  The switch case below ensures a file is created with proper permission and the received information from the gRPC server is written to the file.
-         *  Each case implements a separate service. In case the file write is not successful, then the appropriate exception is raised.
-         */
-        String SaveLocation = "src/main/java/trafficStatistics/client/";
-        switch (option) {
-            case 1:
-            System.out.println("#### Subscription Topic is: r1/openconfig/interfaces/interface/state" );
-            subscribeServiceGrpc.subscribeServiceBlockingStub stub1 = subscribeServiceGrpc.newBlockingStub(channel);
-            stub1.subscribe(StatsRequest.newBuilder().build()).forEachRemaining(statsResponse -> {
-                try {
-                    File create = new File(SaveLocation + "Topic1");
-                    create.setWritable(true);
-                    FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic1.txt");
-                    SaveFile.write(statsResponse.getResult());
-                    SaveFile.close();
-                } catch (IOException e) {
-//                    e.printStackTrace();
-                    System.out.println("");
-                    System.out.println("File write failed, if executing as JAR file this is expected.");
-                    System.out.println("");
-                }
-                System.out.println(statsResponse.getResult());
-            });
-            break;
-            case 2:
-                System.out.println("#### Subscription topic is : System Health");
-            SysHealthServiceGrpc.SysHealthServiceBlockingStub stub2 = SysHealthServiceGrpc.newBlockingStub(channel);
-            stub2.subscribe(SysHealthRequest.newBuilder().build()).forEachRemaining(SysHealthResponse -> {
-                try {
-                    File create = new File(SaveLocation + "Topic2");
-                    create.setWritable(true);
-                    FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic2.txt");
-                    SaveFile.write(SysHealthResponse.getResult());
-                    SaveFile.close();
-                } catch (IOException e) {
-//                    e.printStackTrace();
-                    System.out.println("");
-                    System.out.println("File write failed, if executing as JAR file this is expected.");
-                    System.out.println("");
-                }
-                System.out.println(SysHealthResponse.getResult());
-            });
-            break;
-            case 4:
-                clientCapabilityRequest myReq = new clientCapabilityRequest();
-                myReq.display();
-                myReq.displayVersion(); //Inheritance
-            break;
-            default:
-                try {
-                    throw new InvalidOption("Invalid Option Selected");
-                }
-                catch (InvalidOption e) {
-                    System.out.println(e.getMessage());
-                }
+
+        while (true) {
+            System.out.println("############################");
+            System.out.println("Enter from the following topics to subscribe: \n" +
+                    "1) QueryTrafficStatistics: \n" +
+                    "2) QuerySystemHealth:  \n" +
+                    "3) QueryFullInventoryList: \n" +
+                    "4) QueryProductAvailability: \n" +
+                    "5) QueryProductCostAndLeadTime: \n" +
+                    "6) StopSubscription/ShutDown: \n" +
+                    "Enter your choice: ");
+            Scanner inp = new Scanner(System.in);
+            int option = inp.nextInt();
+            /**
+             *  The SaveLocation variable ensures all the file writes are happening at the same path without any error.
+             *  The switch case below ensures a file is created with proper permission and the received information from the gRPC server is written to the file.
+             *  Each case implements a separate service. In case the file write is not successful, then the appropriate exception is raised.
+             */
+            String SaveLocation = "src/main/java/trafficStatistics/client/";
+
+            switch (option) {
+                case 1:
+                System.out.println("#### Subscription Topic is: r1/openconfig/interfaces/interface/state" );
+                subscribeServiceGrpc.subscribeServiceBlockingStub stub1 = subscribeServiceGrpc.newBlockingStub(channel);
+                stub1.subscribe(StatsRequest.newBuilder().build()).forEachRemaining(statsResponse -> {
+                    try {
+                        File create = new File(SaveLocation + "Topic1_TrafficStats.txt");
+                        create.setWritable(true);
+                        FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic1_TrafficStats.txt");
+                        SaveFile.write(statsResponse.getResult());
+                        SaveFile.close();
+                    } catch (IOException e) {
+    //                    e.printStackTrace();
+                        System.out.println("");
+                        System.out.println("File write failed, if executing as JAR file this is expected.");
+                        System.out.println("");
+                    }
+                    System.out.println(statsResponse.getResult());
+                });
+                break;
+                case 2:
+                    System.out.println("#### Subscription topic is : System Health");
+                SysHealthServiceGrpc.SysHealthServiceBlockingStub stub2 = SysHealthServiceGrpc.newBlockingStub(channel);
+                stub2.subscribe(SysHealthRequest.newBuilder().build()).forEachRemaining(SysHealthResponse -> {
+                    try {
+                        File create = new File(SaveLocation + "Topic2_SystemHealth.txt");
+                        create.setWritable(true);
+                        FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic2_SystemHealth.txt");
+                        SaveFile.write(SysHealthResponse.getResult());
+                        SaveFile.close();
+                    } catch (IOException e) {
+    //                    e.printStackTrace();
+                        System.out.println("");
+                        System.out.println("File write failed, if executing as JAR file this is expected.");
+                        System.out.println("");
+                    }
+                    System.out.println(SysHealthResponse.getResult());
+                });
+                break;
+                case 3:
+                    System.out.println("#### Subscription topic is : FullInventoryList");
+                    FullInventoryListGrpc.FullInventoryListBlockingStub stub3 = FullInventoryListGrpc.newBlockingStub(channel);
+                    stub3.subscribe(QueryFullInventoryList.newBuilder().build()).forEachRemaining(FullInventoryListResponse -> {
+                        try {
+                            File create = new File(SaveLocation + "Topic3_FullInventoryList.txt");
+                            create.setWritable(true);
+                            FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic3_FullInventoryList.txt");
+                            SaveFile.write(FullInventoryListResponse.getResult());
+                            SaveFile.close();
+                        } catch (IOException e) {
+    //                    e.printStackTrace();
+                            System.out.println("");
+                            System.out.println("File write failed, if executing as JAR file this is expected.");
+                            System.out.println("");
+                        }
+                        System.out.println(FullInventoryListResponse.getResult());
+                    });
+                    break;
+                case 4:
+                    System.out.println("#### Subscription topic is : ProductAvailability");
+                    ProductAvailabilityGrpc.ProductAvailabilityBlockingStub stub4 = ProductAvailabilityGrpc.newBlockingStub(channel);
+                    stub4.subscribe(QueryProductAvailability.newBuilder().build()).forEachRemaining(ProductAvailabilityResponse -> {
+                        try {
+                            File create = new File(SaveLocation + "Topic4_ProductAvailability.txt");
+                            create.setWritable(true);
+                            FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic4_ProductAvailability.txt");
+                            SaveFile.write(ProductAvailabilityResponse.getResult());
+                            SaveFile.close();
+                        } catch (IOException e) {
+    //                    e.printStackTrace();
+                            System.out.println("");
+                            System.out.println("File write failed, if executing as JAR file this is expected.");
+                            System.out.println("");
+                        }
+                        System.out.println(ProductAvailabilityResponse.getResult());
+                    });
+                    break;
+                case 5:
+                    System.out.println("#### Subscription topic is : ProductCostAndLeadTime");
+                    ProductCostAndLeadTimeGrpc.ProductCostAndLeadTimeBlockingStub stub5 = ProductCostAndLeadTimeGrpc.newBlockingStub(channel);
+                    stub5.subscribe(QueryProductCostAndLeadTime.newBuilder().build()).forEachRemaining(ProductCostAndLeadTimeResponse -> {
+                        try {
+                            File create = new File(SaveLocation + "Topic5_ProductCostAndLeadTime.txt");
+                            create.setWritable(true);
+                            FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic5_ProductCostAndLeadTime.txt");
+                            SaveFile.write(ProductCostAndLeadTimeResponse.getResult());
+                            SaveFile.close();
+                        } catch (IOException e) {
+    //                    e.printStackTrace();
+                            System.out.println("");
+                            System.out.println("File write failed, if executing as JAR file this is expected.");
+                            System.out.println("");
+                        }
+                        System.out.println(ProductCostAndLeadTimeResponse.getResult());
+                    });
+                    break;
+                case 6:
+                    System.out.println("Shutting Down");
+                    channel.shutdown();
+                    break;
+
+                case 7:
+                    clientCapabilityRequest myReq = new clientCapabilityRequest();
+                    myReq.display();
+                    myReq.displayVersion(); //Inheritance
+                break;
+                default:
+                    try {
+                        throw new InvalidOption("Invalid Option Selected");
+                    }
+                    catch (InvalidOption e) {
+                        System.out.println(e.getMessage());
+                    }
+            }
+            if (option == 6) {
+                break;
+            }
         }
     }
-
     /**
      * This is a user defined exception. If the user enters an invalid input, then this exception is called and the message is sent back to the user.
      *
@@ -163,7 +233,7 @@ public class clientSubscribe {
         mostSubscribed.mostSubscribedTopic();
         longestRunTime.mostSubscribedTopic();
 
-        System.out.println("Shutting Down");
-        channel.shutdown();
+//        System.out.println("Shutting Down");
+//        channel.shutdown();
     }
 }

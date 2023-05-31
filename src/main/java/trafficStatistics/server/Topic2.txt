@@ -1,1 +1,0 @@
-[CPU_Usage, 35%, Memory_Usage , 44%, System_State,  Good, System_Capacity, 115tbps, System_Availability, 60% Available]

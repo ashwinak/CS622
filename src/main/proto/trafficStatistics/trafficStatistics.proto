@@ -27,3 +27,37 @@ service SysHealthService {
   rpc subscribe(SysHealthRequest) returns (stream SysHealthResponse);
 }
 
+message QueryFullInventoryList {
+  string subscription_Path = 1;
+
+}
+message FullInventoryListResponse {
+  string result = 1;
+}
+service FullInventoryList {
+  rpc subscribe(QueryFullInventoryList) returns (stream FullInventoryListResponse);
+}
+
+
+message QueryProductAvailability {
+  string subscription_Path = 1;
+
+}
+message ProductAvailabilityResponse {
+  string result = 1;
+}
+service ProductAvailability {
+  rpc subscribe(QueryProductAvailability) returns (stream ProductAvailabilityResponse);
+}
+
+
+message QueryProductCostAndLeadTime {
+  string subscription_Path = 1;
+
+}
+message ProductCostAndLeadTimeResponse {
+  string result = 1;
+}
+service ProductCostAndLeadTime {
+  rpc subscribe(QueryProductCostAndLeadTime) returns (stream ProductCostAndLeadTimeResponse);
+}
