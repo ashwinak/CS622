@@ -73,8 +73,9 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
     public static String FileIOTopic1()  {
         StringBuilder s = new StringBuilder();
         Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
         try {
-            FileReader ServiceFile = new FileReader("src/main/java/trafficStatistics/server/services.yaml");
+            FileReader ServiceFile = new FileReader(DBLocation);
             Map<String, Object> input = parse.load(ServiceFile);
             Scanner ServiceReader = new Scanner(ServiceFile);
             s.append(input.get("QueryTrafficStatistics").toString());
@@ -90,8 +91,9 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
     public static String FileIOTopic2()  {
         StringBuilder s = new StringBuilder();
         Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
         try {
-            FileReader ServiceFile = new FileReader("src/main/java/trafficStatistics/server/services.yaml");
+            FileReader ServiceFile = new FileReader(DBLocation);
             Map<String, Object> input = parse.load(ServiceFile);
             Scanner ServiceReader = new Scanner(ServiceFile);
             s.append(input.get("QuerySystemHealth").toString());
@@ -110,8 +112,9 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
     public static String FileIOTopic3()  {
         StringBuilder s = new StringBuilder();
         Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
         try {
-            FileReader ServiceFile = new FileReader("src/main/java/trafficStatistics/server/services.yaml");
+            FileReader ServiceFile = new FileReader(DBLocation);
             Map<String, Object> input = parse.load(ServiceFile);
             Scanner ServiceReader = new Scanner(ServiceFile);
             s.append(input.get("QueryFullInventoryList").toString());
@@ -127,8 +130,9 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
     public static String FileIOTopic4()  {
         StringBuilder s = new StringBuilder();
         Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
         try {
-            FileReader ServiceFile = new FileReader("src/main/java/trafficStatistics/server/services.yaml");
+            FileReader ServiceFile = new FileReader(DBLocation);
             Map<String, Object> input = parse.load(ServiceFile);
             Scanner ServiceReader = new Scanner(ServiceFile);
             s.append(input.get("QueryProductAvailability").toString());
@@ -144,8 +148,9 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
     public static String FileIOTopic5()  {
         StringBuilder s = new StringBuilder();
         Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
         try {
-            FileReader ServiceFile = new FileReader("src/main/java/trafficStatistics/server/services.yaml");
+            FileReader ServiceFile = new FileReader(DBLocation);
             Map<String, Object> input = parse.load(ServiceFile);
             Scanner ServiceReader = new Scanner(ServiceFile);
             s.append(input.get("QueryProductCostAndLeadTime").toString());
