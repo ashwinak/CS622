@@ -23,6 +23,7 @@ public class clientSubscribe {
     public static void SubscribeRequest(ManagedChannel channel)  {
 
         while (true) {
+            System.out.println("\n");
             System.out.println("############################");
             System.out.println("Enter from the following topics to subscribe: \n" +
                     "1) QueryTrafficStatistics: \n" +
@@ -43,43 +44,43 @@ public class clientSubscribe {
 
             switch (option) {
                 case 1:
-                System.out.println("#### Subscription Topic is: r1/openconfig/interfaces/interface/state" );
-                subscribeServiceGrpc.subscribeServiceBlockingStub stub1 = subscribeServiceGrpc.newBlockingStub(channel);
-                stub1.subscribe(StatsRequest.newBuilder().build()).forEachRemaining(statsResponse -> {
-                    try {
-                        File create = new File(SaveLocation + "Topic1_TrafficStats.txt");
-                        create.setWritable(true);
-                        FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic1_TrafficStats.txt");
-                        SaveFile.write(statsResponse.getResult());
-                        SaveFile.close();
-                    } catch (IOException e) {
-    //                    e.printStackTrace();
-                        System.out.println("");
-                        System.out.println("File write failed, if executing as JAR file this is expected.");
-                        System.out.println("");
-                    }
-                    System.out.println(statsResponse.getResult());
-                });
-                break;
+                    System.out.println("#### Subscription Topic is: r1/openconfig/interfaces/interface/state" );
+                    subscribeServiceGrpc.subscribeServiceBlockingStub stub1 = subscribeServiceGrpc.newBlockingStub(channel);
+                    stub1.subscribe(StatsRequest.newBuilder().build()).forEachRemaining(statsResponse -> {
+                        try {
+                            File create = new File(SaveLocation + "Topic1_TrafficStats.txt");
+                            create.setWritable(true);
+                            FileWriter SaveFile = new FileWriter(create);
+                            SaveFile.write(statsResponse.getResult());
+                            SaveFile.close();
+                        } catch (IOException e) {
+                            //                    e.printStackTrace();
+                            System.out.println("");
+                            System.out.println("File write failed, if executing as JAR file this is expected.");
+                            System.out.println("");
+                        }
+                        System.out.println(statsResponse.getResult());
+                    });
+                    break;
                 case 2:
                     System.out.println("#### Subscription topic is : System Health");
-                SysHealthServiceGrpc.SysHealthServiceBlockingStub stub2 = SysHealthServiceGrpc.newBlockingStub(channel);
-                stub2.subscribe(SysHealthRequest.newBuilder().build()).forEachRemaining(SysHealthResponse -> {
-                    try {
-                        File create = new File(SaveLocation + "Topic2_SystemHealth.txt");
-                        create.setWritable(true);
-                        FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic2_SystemHealth.txt");
-                        SaveFile.write(SysHealthResponse.getResult());
-                        SaveFile.close();
-                    } catch (IOException e) {
-    //                    e.printStackTrace();
-                        System.out.println("");
-                        System.out.println("File write failed, if executing as JAR file this is expected.");
-                        System.out.println("");
-                    }
-                    System.out.println(SysHealthResponse.getResult());
-                });
-                break;
+                    SysHealthServiceGrpc.SysHealthServiceBlockingStub stub2 = SysHealthServiceGrpc.newBlockingStub(channel);
+                    stub2.subscribe(SysHealthRequest.newBuilder().build()).forEachRemaining(SysHealthResponse -> {
+                        try {
+                            File create = new File(SaveLocation + "Topic2_SystemHealth.txt");
+                            create.setWritable(true);
+                            FileWriter SaveFile = new FileWriter(create);
+                            SaveFile.write(SysHealthResponse.getResult());
+                            SaveFile.close();
+                        } catch (IOException e) {
+                            //                    e.printStackTrace();
+                            System.out.println("");
+                            System.out.println("File write failed, if executing as JAR file this is expected.");
+                            System.out.println("");
+                        }
+                        System.out.println(SysHealthResponse.getResult());
+                    });
+                    break;
                 case 3:
                     System.out.println("#### Subscription topic is : FullInventoryList");
                     FullInventoryListGrpc.FullInventoryListBlockingStub stub3 = FullInventoryListGrpc.newBlockingStub(channel);
@@ -87,11 +88,11 @@ public class clientSubscribe {
                         try {
                             File create = new File(SaveLocation + "Topic3_FullInventoryList.txt");
                             create.setWritable(true);
-                            FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic3_FullInventoryList.txt");
+                            FileWriter SaveFile = new FileWriter(create);
                             SaveFile.write(FullInventoryListResponse.getResult());
                             SaveFile.close();
                         } catch (IOException e) {
-    //                    e.printStackTrace();
+                            //                    e.printStackTrace();
                             System.out.println("");
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
@@ -106,11 +107,11 @@ public class clientSubscribe {
                         try {
                             File create = new File(SaveLocation + "Topic4_ProductAvailability.txt");
                             create.setWritable(true);
-                            FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic4_ProductAvailability.txt");
+                            FileWriter SaveFile = new FileWriter(create);
                             SaveFile.write(ProductAvailabilityResponse.getResult());
                             SaveFile.close();
                         } catch (IOException e) {
-    //                    e.printStackTrace();
+                            //                    e.printStackTrace();
                             System.out.println("");
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
@@ -125,11 +126,11 @@ public class clientSubscribe {
                         try {
                             File create = new File(SaveLocation + "Topic5_ProductCostAndLeadTime.txt");
                             create.setWritable(true);
-                            FileWriter SaveFile = new FileWriter("src/main/java/trafficStatistics/server/Topic5_ProductCostAndLeadTime.txt");
+                            FileWriter SaveFile = new FileWriter(create);
                             SaveFile.write(ProductCostAndLeadTimeResponse.getResult());
                             SaveFile.close();
                         } catch (IOException e) {
-    //                    e.printStackTrace();
+                            //                    e.printStackTrace();
                             System.out.println("");
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
@@ -146,7 +147,7 @@ public class clientSubscribe {
                     clientCapabilityRequest myReq = new clientCapabilityRequest();
                     myReq.display();
                     myReq.displayVersion(); //Inheritance
-                break;
+                    break;
                 default:
                     try {
                         throw new InvalidOption("Invalid Option Selected");
