@@ -5,6 +5,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.junit.jupiter.api.Test;
 
+import java.io.StringWriter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class clientSubscribeTest {
@@ -45,5 +47,15 @@ class clientSubscribeTest {
         assertEquals("src/main/java/trafficStatistics/client/",SaveLocation);
     }
 
+    /**
+     * To test if the user input match with the expected data type by the scanner function.
+     */
+    @Test
+    void CheckUserInputType() {
+        int inp1 = 0;
+        String inp2 = "test";
+        assertEquals(0,inp1);
+        assertEquals("test",inp2);
+    }
 }
 

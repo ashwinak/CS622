@@ -54,6 +54,22 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
             responseObserver.onCompleted();
         }
     }
+
+    static class HigherLeadTimes extends HigherLeadTimesGrpc.HigherLeadTimesImplBase {
+        public void subscribe (QueryHigherLeadTimes request, StreamObserver<HigherLeadTimesResponse> responseObserver) {
+            HigherLeadTimesResponse response = HigherLeadTimesResponse.newBuilder().setResult(FileIOTopic6() + request.getSubscriptionPath()).build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
+    }
+
+    static class HigherCostProducts extends HigherCostProductsGrpc.HigherCostProductsImplBase {
+        public void subscribe (QueryHigherCostProducts request, StreamObserver<HigherCostProductsResponse> responseObserver) {
+            HigherCostProductsResponse response = HigherCostProductsResponse.newBuilder().setResult(FileIOTopic7() + request.getSubscriptionPath()).build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
+    }
     /**
      *
      * @return contents from the file read.
@@ -163,14 +179,50 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
         return s.toString();
     }
 
-    public static <inp> void FileIOTopics(inp a)  {
-
-        /**
-         * The code implementing services read function from the .yaml file.
-         */
-
-        System.out.println("Print element " + a);
+    public static String FileIOTopic6()  {
+        StringBuilder s = new StringBuilder();
+        Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
+        try {
+            FileReader ServiceFile = new FileReader(DBLocation);
+            Map<String, Object> input = parse.load(ServiceFile);
+            Scanner ServiceReader = new Scanner(ServiceFile);
+            s.append(input.get("QueryHigherLeadTimes").toString());
+            ServiceReader.close();
+        }
+        catch (FileNotFoundException e ) {
+//            System.out.println("File not found at the specified path.");
+            return "File not found at the specified path.";
+        }
+        return s.toString();
     }
+
+    public static String FileIOTopic7()  {
+        StringBuilder s = new StringBuilder();
+        Yaml parse = new Yaml();
+        String DBLocation = "src/main/java/trafficStatistics/server/services.yaml";
+        try {
+            FileReader ServiceFile = new FileReader(DBLocation);
+            Map<String, Object> input = parse.load(ServiceFile);
+            Scanner ServiceReader = new Scanner(ServiceFile);
+            s.append(input.get("QueryHigherCostProducts").toString());
+            ServiceReader.close();
+        }
+        catch (FileNotFoundException e ) {
+//            System.out.println("File not found at the specified path.");
+            return "File not found at the specified path.";
+        }
+        return s.toString();
+    }
+
+//    public static <inp> void FileIOTopics(inp a)  {
+//
+//        /**
+//         * The code implementing services read function from the .yaml file.
+//         */
+//
+//        System.out.println("Print element " + a);
+//    }
 }
 
 

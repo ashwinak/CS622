@@ -32,3 +32,9 @@ QueryProductCostAndLeadTime:
                 - Switch : $500 and 250 Days
                 - Server : $150 and 100 Days
 
+QueryHigherLeadTimes:
+                - Switch
+                - Router
+
+QueryHigherCostProducts:
+               - Router

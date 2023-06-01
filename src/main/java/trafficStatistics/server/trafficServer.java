@@ -14,6 +14,8 @@ public class trafficServer {
                 .addService(new trafficServerImpl.FullInventoryList())
                 .addService(new trafficServerImpl.ProductAvailability())
                 .addService(new trafficServerImpl.ProductCostAndLeadTime())
+                .addService(new trafficServerImpl.HigherLeadTimes())
+                .addService(new trafficServerImpl.HigherCostProducts())
                 .build();
 
         server.start();

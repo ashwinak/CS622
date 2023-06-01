@@ -1,6 +1,6 @@
 # Steps to run the gRPC service.
 This code implements one or more gRPC service where the client subscribes to topics via 
-gRPC channel on a specific TCP port. The server responsd back with the response.
+gRPC channel on a specific TCP port. The server responds back with the response.
 
 # First run the server code to start listening on port 50051
 
@@ -13,13 +13,54 @@ Listening on port: 50052
 # Step 2 : Now execute clientSubscribe.java
 
 ``` 
+############################
 Enter from the following topics to subscribe: 
-1) Traffic statistics: 
-2) Health of the System: 
-3) Uptime of the System 
-4) Check server capability 
-5) Check active subscription 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryFullInventoryList: 
+4) QueryProductAvailability: 
+5) HighestLeadTimeAndCost: 
+6) QueryProductCostAndLeadTime: 
+7) StopSubscription/ShutDown: 
 Enter your choice: 
+5
+#### Subscription topic is : ProductCostAndLeadTime
+Enter More Specific Queries in ProductCostAndLeadTime Topic: 
+5a) List Products with N lead time in Days (200 days) : 
+
+200
+200
+[Switch, Router]
+Enter More Specific Queries in ProductCostAndLeadTime Topic: 
+5b) List products greater than N Cost in $ (150 $) :  
+
+150$
+150$
+[Router]
+#### Subscription topic is : ProductCostAndLeadTime
+[{Router=$1000 and 300 Days}, {Switch=$500 and 250 Days}, {Server=$150 and 100 Days}]
+
+
+############################
+Enter from the following topics to subscribe: 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryFullInventoryList: 
+4) QueryProductAvailability: 
+5) HighestLeadTimeAndCost: 
+6) QueryProductCostAndLeadTime: 
+7) StopSubscription/ShutDown: 
+Enter your choice: 
+7
+Shutting Down
+### Implementing Down Casting
+Printing all topic schemas supported by Server
+### Polymorphic - > Many Forms
+The topic most subscribed by the client
+The topic having the longest run time
+
+Process finished with exit code 0
+
 ```
 
 ## The user enters any of the given service option. The client code will
@@ -37,47 +78,57 @@ Process finished with exit code 0
 # Step 4 : Execute as a JAR file
 
 ```
-ashwinak@ashwinak-u2:~$ java -jar '/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/out/artifacts/gRPC_Project_jar/gRPC-Project.jar' 
+ashwinak@ashwinak-u2:~$ java -jar '/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/out/artifacts/gRPC_Project_main_jar/gRPC-Project.main.jar' 
+ 
+
+############################
 Enter from the following topics to subscribe: 
-1) Stream Traffic statistics: 
-2) Stream System Health:  
-3) Stream Common Friends in FB Acct: 
-4) Stream Weather Information: 
-5) Stream Flight Status: 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryFullInventoryList: 
+4) QueryProductAvailability: 
+5) HighestLeadTimeAndCost: 
+6) QueryProductCostAndLeadTime: 
+7) StopSubscription/ShutDown: 
 Enter your choice: 
-1
-#### Subscription Topic is: r1/openconfig/interfaces/interface/state
+5
+#### Subscription topic is : ProductCostAndLeadTime
+Enter More Specific Queries in ProductCostAndLeadTime Topic: 
+5a) List Products with N lead time in Days (200 days) : 
+
+123
+Invalid Option Selected, only supports '200' days as input!
+Enter More Specific Queries in ProductCostAndLeadTime Topic: 
+5b) List products greater than N Cost in $ (150 $) :  
+
+111
+Invalid Option Selected, only supports '150$'  as input!
+#### Subscription topic is : ProductCostAndLeadTime
 
 File write failed, if executing as JAR file this is expected.
 
-[{openconfig/interfaces/interface/state/r1/aggregate=1tbps}, {openconfig/interfaces/interface/state/r1/aggregate=2tbps}, {openconfig/interfaces/interface/state/r1/aggregate=3tbps}, {openconfig/interfaces/interface/state/r1/aggregate=4tbps}, {openconfig/interfaces/interface/state/r1/aggregate=5tbps}, {openconfig/interfaces/interface/state/r1/aggregate=6tbps}, {openconfig/interfaces/interface/state/r1/aggregate=7tbps}, {openconfig/interfaces/interface/state/r1/aggregate=8tbps}, {openconfig/interfaces/interface/state/r1/aggregate=9tbps}, {openconfig/interfaces/interface/state/r1/aggregate=10tbps}]
+[{Router=$1000 and 300 Days}, {Switch=$500 and 250 Days}, {Server=$150 and 100 Days}]
+
+
+############################
+Enter from the following topics to subscribe: 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryFullInventoryList: 
+4) QueryProductAvailability: 
+5) HighestLeadTimeAndCost: 
+6) QueryProductCostAndLeadTime: 
+7) StopSubscription/ShutDown: 
+Enter your choice: 
+7
+Shutting Down
 ### Implementing Down Casting
 Printing all topic schemas supported by Server
 ### Polymorphic - > Many Forms
 The topic most subscribed by the client
 The topic having the longest run time
-Shutting Down
-ashwinak@ashwinak-u2:~$ java -jar '/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/out/artifacts/gRPC_Project_jar/gRPC-Project.jar' 
-Enter from the following topics to subscribe: 
-1) Stream Traffic statistics: 
-2) Stream System Health:  
-3) Stream Common Friends in FB Acct: 
-4) Stream Weather Information: 
-5) Stream Flight Status: 
-Enter your choice: 
-2
-#### Subscription topic is : System Health
-
-File write failed, if executing as JAR file this is expected.
-
-[{CPU_Usage=35%}, {Memory_Usage=44%}, {System_State=Good}, {System_Capacity=115tbps}, {System_Availability=60% Available}]
-### Implementing Down Casting
-Printing all topic schemas supported by Server
-### Polymorphic - > Many Forms
-The topic most subscribed by the client
-The topic having the longest run time
-Shutting Down
 ashwinak@ashwinak-u2:~$ 
+
 
 
 

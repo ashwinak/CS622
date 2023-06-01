@@ -8,6 +8,7 @@ import io.grpc.ManagedChannelBuilder;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class clientSubscribe {
@@ -30,8 +31,9 @@ public class clientSubscribe {
                     "2) QuerySystemHealth:  \n" +
                     "3) QueryFullInventoryList: \n" +
                     "4) QueryProductAvailability: \n" +
-                    "5) QueryProductCostAndLeadTime: \n" +
-                    "6) StopSubscription/ShutDown: \n" +
+                    "5) HighestLeadTimeAndCost: \n" +
+                    "6) QueryProductCostAndLeadTime: \n" +
+                    "7) StopSubscription/ShutDown: \n" +
                     "Enter your choice: ");
             Scanner inp = new Scanner(System.in);
             int option = inp.nextInt();
@@ -120,6 +122,89 @@ public class clientSubscribe {
                     });
                     break;
                 case 5:
+                    /**
+                     *  A generic class will be used for case 5. Here the user can input either an integer or string, a common generic class will execute irrespective
+                     *  of the user data type and fetch the results. In this case the user input is expected to be an integer or "200" in days for lead time and
+                     *  "150$" as string to stream device information expensive than 150$.
+                     *  Pre-condition : User enters an integer or string as input.
+                     *
+                     *  Post-condition : Based on user's input a common generic class is used to fetch information requested by the user.
+                     *
+                     */
+                    class genericClass <T> {
+                        T query;
+                        genericClass(T query) {
+                            this.query = query;
+                        }
+                        public T getQuery() {
+                            return this.query;
+                        }
+                    }
+                    System.out.println("#### Subscription topic is : ProductCostAndLeadTime");
+                    System.out.println("Enter More Specific Queries in ProductCostAndLeadTime Topic: \n" +
+                            "5a) List Products with N lead time in Days (200 days) : \n");
+
+                    Scanner inp5a = new Scanner(System.in);
+                    int option5a = inp5a.nextInt();
+                    switch (option5a) {
+                        case 200:
+                            HigherLeadTimesGrpc.HigherLeadTimesBlockingStub stub5a = HigherLeadTimesGrpc.newBlockingStub(channel);
+                            stub5a.subscribe(QueryHigherLeadTimes.newBuilder().build()).forEachRemaining(HigherLeadTimesResponse -> {
+                            try {
+                                genericClass<Integer> intQuery = new genericClass<Integer>(option5a);
+                                File create = new File(SaveLocation + "Topic5a_HigherLeadTimes.txt");
+                                create.setWritable(true);
+                                FileWriter SaveFile = new FileWriter(create);
+                                SaveFile.write(HigherLeadTimesResponse.getResult());
+                                SaveFile.close();
+                                System.out.println(intQuery.getQuery());
+                            }
+                            catch (InputMismatchException | IOException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            System.out.println(HigherLeadTimesResponse.getResult());
+                            });
+                        break;
+                        default:
+                            try {
+                                throw new InvalidOption("Invalid Option Selected, only supports '200' days as input!");
+                            }
+                            catch (InvalidOption e) {
+                                System.out.println(e.getMessage());
+                            }
+                    }
+                    System.out.println("Enter More Specific Queries in ProductCostAndLeadTime Topic: \n" +
+                            "5b) List products greater than N Cost in $ (150 $) :  \n");
+                    Scanner inp5b = new Scanner(System.in);
+                    String  option5b = inp5b.next();
+                    switch (option5b) {
+                        case "150$":
+                            HigherCostProductsGrpc.HigherCostProductsBlockingStub stub5b = HigherCostProductsGrpc.newBlockingStub(channel);
+                            stub5b.subscribe(QueryHigherCostProducts.newBuilder().build()).forEachRemaining(HigherCostProductsResponse -> {
+                                try {
+                                    genericClass<String> strQuery = new genericClass<String>(option5b);
+                                    File create = new File(SaveLocation + "Topic5b_HigherCostProducts.txt");
+                                    create.setWritable(true);
+                                    FileWriter SaveFile = new FileWriter(create);
+                                    SaveFile.write(HigherCostProductsResponse.getResult());
+                                    SaveFile.close();
+                                    System.out.println(strQuery.getQuery());
+                                }
+                                catch (InputMismatchException | IOException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                System.out.println(HigherCostProductsResponse.getResult());
+                            });
+                        break;
+                        default:
+                            try {
+                                throw new InvalidOption("Invalid Option Selected, only supports '150$'  as input!");
+                            }
+                            catch (InvalidOption e) {
+                                System.out.println(e.getMessage());
+                            }
+                    }
+                case 6:
                     System.out.println("#### Subscription topic is : ProductCostAndLeadTime");
                     ProductCostAndLeadTimeGrpc.ProductCostAndLeadTimeBlockingStub stub5 = ProductCostAndLeadTimeGrpc.newBlockingStub(channel);
                     stub5.subscribe(QueryProductCostAndLeadTime.newBuilder().build()).forEachRemaining(ProductCostAndLeadTimeResponse -> {
@@ -137,13 +222,17 @@ public class clientSubscribe {
                         }
                         System.out.println(ProductCostAndLeadTimeResponse.getResult());
                     });
-                    break;
-                case 6:
+                break;
+                case 7:
+
+                    /**
+                     * Functionality is added to keep the channel open until explicitly requested by the user using case 7.
+                     */
                     System.out.println("Shutting Down");
                     channel.shutdown();
                     break;
 
-                case 7:
+                case 8:
                     clientCapabilityRequest myReq = new clientCapabilityRequest();
                     myReq.display();
                     myReq.displayVersion(); //Inheritance
@@ -156,7 +245,11 @@ public class clientSubscribe {
                         System.out.println(e.getMessage());
                     }
             }
-            if (option == 6) {
+
+            /**
+             * This if conditions ensures the channel is shutdown and the progrom stops executing.
+             */
+            if (option == 7) {
                 break;
             }
         }
@@ -185,7 +278,7 @@ public class clientSubscribe {
     }
     static class clientCapabilityRequest extends clientDisplay {
         public void display() {
-            System.out.println("Server supports streaming stock information, traffic stats and more!!!!");
+            System.out.println("Server supports streaming inventory information, traffic stats and more!!!!");
         }
     }
     static class ServerAllTopics {
