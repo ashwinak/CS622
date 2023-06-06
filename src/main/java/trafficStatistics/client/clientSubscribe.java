@@ -5,11 +5,12 @@ import com.proto.trafficStatistics.subscribeServiceGrpc;
 import com.proto.trafficStatistics.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+
+import java.io.*;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class clientSubscribe {
     /**
@@ -25,13 +26,13 @@ public class clientSubscribe {
 
         while (true) {
             System.out.println("\n");
-            System.out.println("############################");
-            System.out.println("Enter from the following topics to subscribe: \n" +
+            System.out.println("########################################################");
+            System.out.println("Select topics to subscribe: \n" +
                     "1) QueryTrafficStatistics: \n" +
                     "2) QuerySystemHealth:  \n" +
                     "3) QueryFullInventoryList: \n" +
                     "4) QueryProductAvailability: \n" +
-                    "5) HighestLeadTimeAndCost: \n" +
+                    "5) QueryHighestLeadTimeAndCost: \n" +
                     "6) QueryProductCostAndLeadTime: \n" +
                     "7) StopSubscription/ShutDown: \n" +
                     "Enter your choice: ");
@@ -53,15 +54,51 @@ public class clientSubscribe {
                             File create = new File(SaveLocation + "Topic1_TrafficStats.txt");
                             create.setWritable(true);
                             FileWriter SaveFile = new FileWriter(create);
-                            SaveFile.write(statsResponse.getResult());
+//                            SaveFile.write(statsResponse.getResult());
+                            SaveFile.write(Arrays.toString(statsResponse.getResult().split(","))
+                                    .replace("["," ")
+                                    .replace("{","")
+                                    .replace("}",""));
                             SaveFile.close();
+                            /**
+                             * The following code creates a new object to store the contents received from the server as a binary file.
+                             * The binary file is used only for interface statistics and not for rest of the switch cases because the interface
+                             * statistics output is expected to be large.
+                             */
+                            System.out.println("### Writing the response from server to a binary file");
+                            ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(SaveLocation+ "Topic1_TrafficStats.dat"));
+                            file.writeObject(Arrays.toString(statsResponse.getResult().split(","))
+                                    .replace("["," ")
+                                    .replace("{","")
+                                    .replace("}",""));
+                            /**
+                             * The following code reads the stored binary file that was previously created.
+                             *
+                             */
+                            System.out.println("Reading from the binary file..");
+                            System.out.println(" ");
+                            ObjectInputStream fileRead = new ObjectInputStream(new FileInputStream(SaveLocation + "Topic1_TrafficStats.dat"));
+                            Stream<String> TrafficStatStream = Stream.of(fileRead.readObject().toString());
+                            TrafficStatStream.forEach(s -> System.out.printf("%s%n",s));
+
                         } catch (IOException e) {
-                            //                    e.printStackTrace();
+                            //e.printStackTrace();
                             System.out.println("");
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
                         }
-                        System.out.println(statsResponse.getResult());
+
+                        ArrayList pPrint= new ArrayList(Arrays.asList(statsResponse.getResult().split(",")));
+                        for(int i=0;i<pPrint.size();i++)
+                        {
+                            System.out.println(pPrint.get(i).toString()
+                                    .replace("["," ")
+                                    .replace ("]"," ")
+                                    .replace("{","")
+                                    .replace("}",""));
+                        }
                     });
                     break;
                 case 2:
@@ -80,7 +117,16 @@ public class clientSubscribe {
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
                         }
-                        System.out.println(SysHealthResponse.getResult());
+                        ArrayList pPrint= new ArrayList(Arrays.asList(SysHealthResponse.getResult().split(",")));
+                        for(int i=0;i<pPrint.size();i++)
+                        {
+                            System.out.println(pPrint.get(i).toString()
+                                    .replace("["," ")
+                                    .replace ("]"," ")
+                                    .replace("{","")
+                                    .replace("}",""));
+                        }
+//                        System.out.println(SysHealthResponse.getResult());
                     });
                     break;
                 case 3:
@@ -99,7 +145,16 @@ public class clientSubscribe {
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
                         }
-                        System.out.println(FullInventoryListResponse.getResult());
+                        ArrayList pPrint= new ArrayList(Arrays.asList(FullInventoryListResponse.getResult().split(",")));
+                        for(int i=0;i<pPrint.size();i++)
+                        {
+                            System.out.println(pPrint.get(i).toString()
+                                    .replace("["," ")
+                                    .replace ("]"," ")
+                                    .replace("{","")
+                                    .replace("}",""));
+                        }
+//                        System.out.println(FullInventoryListResponse.getResult());
                     });
                     break;
                 case 4:
@@ -118,7 +173,16 @@ public class clientSubscribe {
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
                         }
-                        System.out.println(ProductAvailabilityResponse.getResult());
+                        ArrayList pPrint= new ArrayList(Arrays.asList(ProductAvailabilityResponse.getResult().split(",")));
+                        for(int i=0;i<pPrint.size();i++)
+                        {
+                            System.out.println(pPrint.get(i).toString()
+                                    .replace("["," ")
+                                    .replace ("]"," ")
+                                    .replace("{","")
+                                    .replace("}",""));
+                        }
+//                        System.out.println(ProductAvailabilityResponse.getResult());
                     });
                     break;
                 case 5:
@@ -220,7 +284,16 @@ public class clientSubscribe {
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
                         }
-                        System.out.println(ProductCostAndLeadTimeResponse.getResult());
+                        ArrayList pPrint= new ArrayList(Arrays.asList(ProductCostAndLeadTimeResponse.getResult().split(",")));
+                        for(int i=0;i<pPrint.size();i++)
+                        {
+                            System.out.println(pPrint.get(i).toString()
+                                    .replace("["," ")
+                                    .replace ("]"," ")
+                                    .replace("{","")
+                                    .replace("}",""));
+                        }
+//                        System.out.println(ProductCostAndLeadTimeResponse.getResult());
                     });
                 break;
                 case 7:
