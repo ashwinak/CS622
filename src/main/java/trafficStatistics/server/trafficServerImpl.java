@@ -14,8 +14,14 @@ import java.util.Scanner;
 import org.yaml.snakeyaml.*;
 
 /**
- * Each class here implements the service definition defined in the proto file. For now two services are active, more services will be
- * active in the future.
+ * Each class here implements the service definition defined in the proto file. A total of six services are defined.
+ * This is the backend code for the gRPC server that receives and subscribe request and responds back with relevant data based on the
+ * definitions on the Yaml file.
+ *
+ * pre-condition : The server waits for the request from client on any of these defined services.
+ * post-condition : The server reads the yaml file contents via FileIOTopic classes and streams the information upon client's request
+ * via the response object.
+ *
  */
 
 public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImplBase{

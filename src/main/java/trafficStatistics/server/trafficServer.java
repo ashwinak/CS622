@@ -4,6 +4,13 @@ import io.grpc.ServerBuilder;
 import org.w3c.dom.ls.LSOutput;
 import java.io.IOException;
 
+/**
+ *  This is the server code that enables all servers and opens the port for client to communicate.
+ *  For the inventory management project to work, this code must be run first before the client code.
+ *  pre-condition : User executes the server code.
+ *  post-condition : The server enables all services and listens on a specific port. The client can use that port to communicate to the server.
+ */
+
 public class trafficServer {
     public static void main(String[] args) throws IOException, InterruptedException {
         int port = 50051;

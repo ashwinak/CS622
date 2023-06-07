@@ -5,6 +5,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.StringWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,5 +58,15 @@ class clientSubscribeTest {
         assertEquals(0,inp1);
         assertEquals("test",inp2);
     }
+    @Test
+    /**
+     * Test to check if the binary file is created.
+     */
+    void BinaryFileCheck() {
+        File file = new File("/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/src/main/java/trafficStatistics/client/Topic1_TrafficStats.dat");
+        assertTrue(file.exists());
+    }
+
+
 }
 
