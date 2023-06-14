@@ -166,8 +166,12 @@ Process finished with exit code 0
 # Execute clientSubscribeTest.java
 
 ``` 
+// Six Test cases defined in clientSubscribeTest
+
+
 Test Passed.
 Process finished with exit code 0
+
 ```
 
 # Step 4 : Execute as a JAR file

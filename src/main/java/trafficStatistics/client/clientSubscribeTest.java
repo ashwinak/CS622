@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.StringWriter;
+import java.net.Socket;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class clientSubscribeTest {
     @Test
@@ -65,6 +67,35 @@ class clientSubscribeTest {
     void BinaryFileCheck() {
         File file = new File("/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/src/main/java/trafficStatistics/client/Topic1_TrafficStats.dat");
         assertTrue(file.exists());
+    }
+    public static boolean isPortOpen(String host, int port) {
+        Socket s = null;
+        try {
+            s = new Socket(host, port);
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("The port " +port + " is being used");
+            return false;
+        }
+    }
+
+    /**
+     *  Test to make sure the ports are not used by any other application.
+     */
+    @Test
+    public void checkPortAvailability() {
+        int port1 = 50051;
+        int port2 = 50052;
+        try {
+            assertTrue(isPortOpen("localhost", port1));
+            assertTrue(isPortOpen("localhost", port2));
+
+        }
+        catch (Exception e) {
+            System.out.println("The port " +port1+ " is being used by another application");
+            System.out.println("The port " +port2+ " is being used by another application");
+        }
     }
 
 
