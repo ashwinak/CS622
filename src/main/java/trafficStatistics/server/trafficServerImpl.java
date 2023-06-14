@@ -33,7 +33,6 @@ public class trafficServerImpl extends subscribeServiceGrpc.subscribeServiceImpl
         responseObserver.onCompleted();
     }
 
-
     static class SysHealthService extends SysHealthServiceGrpc.SysHealthServiceImplBase {
         public void subscribe(SysHealthRequest request, StreamObserver<SysHealthResponse> responseObserver) {
             SysHealthResponse response = SysHealthResponse.newBuilder().setResult(FileIOTopic2() + request.getSubscriptionPath()).build();

@@ -9,6 +9,11 @@ gRPC channel on a specific TCP port. The server responds back with the response.
 ``` 
 Server Started
 Listening on port: 50051
+### Starting new Thread and new port for full inventory list subscription....
+Number of threads 4
+Server Started
+Listening on port: 50052
+
 
 ```
 # Step 2 : Now execute clientSubscribe.java
@@ -19,11 +24,10 @@ Listening on port: 50051
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
 1
 #### Subscription Topic is: r1/openconfig/interfaces/interface/state
@@ -47,11 +51,10 @@ Enter your choice:
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
 2
 #### Subscription topic is : System Health
@@ -66,14 +69,85 @@ Enter your choice:
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
-7
-Shutting Down
+3
+#### Subscription topic is : ProductAvailability
+ Router=200 Count
+ Server=75 Count
+ Switch=100 Count 
+
+
+########################################################
+Select topics to subscribe: 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
+Enter your choice: 
+4
+#### Subscription topic is : ProductCostAndLeadTime
+Enter More Specific Queries in ProductCostAndLeadTime Topic: 
+5a) List Products with N lead time in Days (200 days) : 
+
+200
+200
+ Switch
+ Router
+Enter More Specific Queries in ProductCostAndLeadTime Topic: 
+5b) List products greater than N Cost in $ (150 $) :  
+
+150$
+150$
+ Router
+
+
+########################################################
+Select topics to subscribe: 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
+Enter your choice: 
+5
+#### Subscription topic is : ProductCostAndLeadTime
+ Router=$1000 and 300 Days
+ Switch=$500 and 250 Days
+ Server=$150 and 100 Days 
+
+
+########################################################
+Select topics to subscribe: 
+1) QueryTrafficStatistics: 
+2) QuerySystemHealth:  
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
+Enter your choice: 
+6
+
+
+Do you want to download Full Inventory List? (yes or no): 
+Enter your choice: 
+yes
+### Downloading FullInventoryList from Server...
+ Router
+ Server
+ Switch 
+############
+Shutdown channel & channel2....
+
+
+
+############
 ### Implementing Down Casting
 Printing all topic schemas supported by Server
 ### Polymorphic - > Many Forms
@@ -106,11 +180,10 @@ ashwinak@ashwinak-u2:~$ java -jar '/media/ashwinak/Ashwin-CBK/CS622-Advanced Pro
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
 1
 #### Subscription Topic is: r1/openconfig/interfaces/interface/state
@@ -123,11 +196,10 @@ File write failed, if executing as JAR file this is expected.
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
 2
 #### Subscription topic is : System Health
@@ -145,33 +217,12 @@ File write failed, if executing as JAR file this is expected.
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
 3
-#### Subscription topic is : FullInventoryList
-
-File write failed, if executing as JAR file this is expected.
-
- Router
- Server
- Switch 
-
-
-########################################################
-Select topics to subscribe: 
-1) QueryTrafficStatistics: 
-2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
-Enter your choice: 
-4
 #### Subscription topic is : ProductAvailability
 
 File write failed, if executing as JAR file this is expected.
@@ -185,13 +236,12 @@ File write failed, if executing as JAR file this is expected.
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
-5
+4
 #### Subscription topic is : ProductCostAndLeadTime
 Enter More Specific Queries in ProductCostAndLeadTime Topic: 
 5a) List Products with N lead time in Days (200 days) : 
@@ -212,13 +262,12 @@ src/main/java/trafficStatistics/client/Topic5b_HigherCostProducts.txt (No such f
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
-6
+5
 #### Subscription topic is : ProductCostAndLeadTime
 
 File write failed, if executing as JAR file this is expected.
@@ -232,23 +281,33 @@ File write failed, if executing as JAR file this is expected.
 Select topics to subscribe: 
 1) QueryTrafficStatistics: 
 2) QuerySystemHealth:  
-3) QueryFullInventoryList: 
-4) QueryProductAvailability: 
-5) QueryHighestLeadTimeAndCost: 
-6) QueryProductCostAndLeadTime: 
-7) StopSubscription/ShutDown: 
+3) QueryProductAvailability: 
+4) QueryHighestLeadTimeAndCost: 
+5) QueryProductCostAndLeadTime: 
+6) DownloadFullInventoryList and Shutdown: 
 Enter your choice: 
-7
-Shutting Down
+6
+
+
+Do you want to download Full Inventory List? (yes or no): 
+Enter your choice: 
+yes
+### Downloading FullInventoryList from Server...
+
+File write failed, if executing as JAR file this is expected.
+
+ Router
+ Server
+ Switch 
+############
+Shutdown channel & channel2....
+
+############
 ### Implementing Down Casting
 Printing all topic schemas supported by Server
 ### Polymorphic - > Many Forms
 The topic most subscribed by the client
 The topic having the longest run time
 ashwinak@ashwinak-u2:~$ 
-
-
-
-
 
 ```

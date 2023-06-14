@@ -34,7 +34,7 @@ public class clientSubscribe {
                     "3) QueryProductAvailability: \n" +
                     "4) QueryHighestLeadTimeAndCost: \n" +
                     "5) QueryProductCostAndLeadTime: \n" +
-                    "6) StopSubscription/ShutDown: \n" +
+                    "6) DownloadFullInventoryList and Shutdown: \n" +
                     "Enter your choice: ");
             Scanner inp = new Scanner(System.in);
             int option = inp.nextInt();
@@ -315,8 +315,8 @@ public class clientSubscribe {
                     /**
                      * Functionality is added to keep the channel open until explicitly requested by the user using case 7.
                      */
-                    System.out.println("Shutting Down");
-                    channel.shutdown();
+//                    System.out.println("Shutting Down");
+//                    channel.shutdown();
                     break;
 
                 case 8:
@@ -332,7 +332,6 @@ public class clientSubscribe {
                         System.out.println(e.getMessage());
                     }
             }
-
             /**
              * This if conditions ensures the channel is shutdown and the progrom stops executing.
              */
@@ -341,12 +340,10 @@ public class clientSubscribe {
             }
         }
     }
-
     public static void SubscribeRequest2(ManagedChannel channel2) {
         while (true) {
             System.out.println("\n");
-            System.out.println("########################################################");
-            System.out.println("Download Full Inventory List (yes or no): \n" +
+            System.out.println("Do you want to download Full Inventory List? (yes or no): \n" +
                     "Enter your choice: ");
             Scanner inp5b = new Scanner(System.in);
             String  InvList = inp5b.next();
@@ -459,12 +456,21 @@ public class clientSubscribe {
                 .usePlaintext()
                 .build();
         SubscribeRequest(channel);
-
         ManagedChannel channel2 = ManagedChannelBuilder
                 .forAddress("localhost",50052)
                 .usePlaintext()
                 .build();
         SubscribeRequest2(channel2);
+        System.out.println("############");
+        System.out.println("Shutdown channel & channel2....");
+        channel.shutdown();
+        channel2.shutdown();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("############");
+
+
 
 
         /** Explicit DownCasting
@@ -482,15 +488,10 @@ public class clientSubscribe {
          * For the ServerActiveTopic it's important to get show the topic that has the longest uptime. This telemetry information is important to make decisions later on.
          * While, the ServerAllTopic enables which topic is the most subscribed by the client in other words, which topic was the most interested ones among the many topics involved.
          */
-
         ServerAllTopics mostSubscribed = new ServerAllTopics();
         ServerAllTopics longestRunTime = new ServerActiveTopics();
-
         System.out.println("### Polymorphic - > Many Forms");
         mostSubscribed.mostSubscribedTopic();
         longestRunTime.mostSubscribedTopic();
-
-//        System.out.println("Shutting Down");
-//        channel.shutdown();
     }
 }
