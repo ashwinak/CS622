@@ -20,8 +20,6 @@ public class clientSubscribe {
      *  For the time being only two services are offered. Service 1 and 2. Rest of the service will lead to invalid service message to the user.
      *  The first service will initiate gRPC request to the server and server responds back with the response , followed by the connection is closed.
      *  The second service will stream the system health via gRPC request/response.
-     *
-     *
      */
     public static void SubscribeRequest(ManagedChannel channel)  {
 
