@@ -28,7 +28,13 @@ public class trafficServer  {
         server.start();
         System.out.println("Server Started");
         System.out.println("Listening on port: " + port);
-
+/**
+ * A new thread is created to handle requests from port 50052 for full inventory request from client.  This thread will spawn
+ * a new port 50052 and the attached services. The main thread will spawn  port 50051 and its attached services.
+ *
+ *      * pre-condition : The new service Full inventory download is not spawned or attached to the new port.
+ *      * post-condition : An exception is generated and error back to the user indicating that an invalid option was used.
+ */
         Thread FullInventory = new Thread(new trafficServerFullInventory() {
             public void run() {
                 System.out.println("### Starting new Thread and new port for full inventory list subscription....");
@@ -59,6 +65,10 @@ public class trafficServer  {
             }
         });
         FullInventory.start();
+        /**
+         *  Printing active thread count before shutting down services.
+         */
+
         System.out.println("Number of threads " + Thread.activeCount());
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Received shutdown request");

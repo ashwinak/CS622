@@ -340,6 +340,17 @@ public class clientSubscribe {
             }
         }
     }
+
+    /**
+     *
+     * @param channel2
+     *  A new method subscribrequest2 and new channel2 is created to attach the client request "full inventory list"
+     *  to channel2. Here channel2 will use port 50052.
+     *
+     *  The switch case here is to download full inventory list and expects user input as "yes or no". The reason
+     *  to use separate channel and thread is that the full inventory list is expected to be large and hence
+     *  it will be executed as a separate thread parallel to the main thread.
+     */
     public static void SubscribeRequest2(ManagedChannel channel2) {
         while (true) {
             System.out.println("\n");
@@ -351,6 +362,10 @@ public class clientSubscribe {
              *  The SaveLocation variable ensures all the file writes are happening at the same path without any error.
              *  The switch case below ensures a file is created with proper permission and the received information from the gRPC server is written to the file.
              *  Each case implements a separate service. In case the file write is not successful, then the appropriate exception is raised.
+             *
+             *       * pre-condition : User enters either "yes or no" as response.
+             *      * post-condition : Based on the input the application will either download full inventory from the server and shutdown or
+             *      the application will just shut down all threads and channels.
              */
             String SaveLocation = "src/main/java/trafficStatistics/client/";
             switch (InvList) {
@@ -451,6 +466,13 @@ public class clientSubscribe {
         }
     }
     public static void main(String[] args)  {
+        /**
+         *  From the io.grpc api, managed channel method is used to create two handles for both ports 50051 and 50052.
+         *  These ports are used by the client to request services from the server. PlainText is used for this transaction.
+         *
+         *  * pre-condition : Both ports are available to be used by the inventory management application.
+         *  * post-condition : Both ports are taken by the application, and it cannot be used by any other application.
+         */
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost",50051)
                 .usePlaintext()
@@ -469,7 +491,6 @@ public class clientSubscribe {
         System.out.println();
         System.out.println();
         System.out.println("############");
-
 
 
 
