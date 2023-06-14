@@ -31,11 +31,10 @@ public class clientSubscribe {
             System.out.println("Select topics to subscribe: \n" +
                     "1) QueryTrafficStatistics: \n" +
                     "2) QuerySystemHealth:  \n" +
-                    "3) QueryFullInventoryList: \n" +
-                    "4) QueryProductAvailability: \n" +
-                    "5) QueryHighestLeadTimeAndCost: \n" +
-                    "6) QueryProductCostAndLeadTime: \n" +
-                    "7) StopSubscription/ShutDown: \n" +
+                    "3) QueryProductAvailability: \n" +
+                    "4) QueryHighestLeadTimeAndCost: \n" +
+                    "5) QueryProductCostAndLeadTime: \n" +
+                    "6) StopSubscription/ShutDown: \n" +
                     "Enter your choice: ");
             Scanner inp = new Scanner(System.in);
             int option = inp.nextInt();
@@ -146,39 +145,6 @@ public class clientSubscribe {
                     };
                     break;
                 case 3:
-                    System.out.println("#### Subscription topic is : FullInventoryList");
-                    try {
-                    FullInventoryListGrpc.FullInventoryListBlockingStub stub3 = FullInventoryListGrpc.newBlockingStub(channel);
-                    stub3.subscribe(QueryFullInventoryList.newBuilder().build()).forEachRemaining(FullInventoryListResponse -> {
-                        try {
-                            File create = new File(SaveLocation + "Topic3_FullInventoryList.txt");
-                            create.setWritable(true);
-                            FileWriter SaveFile = new FileWriter(create);
-                            SaveFile.write(FullInventoryListResponse.getResult());
-                            SaveFile.close();
-                        } catch (IOException e) {
-                            //                    e.printStackTrace();
-                            System.out.println("");
-                            System.out.println("File write failed, if executing as JAR file this is expected.");
-                            System.out.println("");
-                        }
-                        ArrayList pPrint= new ArrayList(Arrays.asList(FullInventoryListResponse.getResult().split(",")));
-                        for(int i=0;i<pPrint.size();i++)
-                        {
-                            System.out.println(pPrint.get(i).toString()
-                                    .replace("["," ")
-                                    .replace ("]"," ")
-                                    .replace("{","")
-                                    .replace("}",""));
-                        }
-//                        System.out.println(FullInventoryListResponse.getResult());
-                    });
-                    }
-                    catch (StatusRuntimeException e) {
-                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
-                    };
-                    break;
-                case 4:
                     System.out.println("#### Subscription topic is : ProductAvailability");
                     try {
                     ProductAvailabilityGrpc.ProductAvailabilityBlockingStub stub4 = ProductAvailabilityGrpc.newBlockingStub(channel);
@@ -211,7 +177,7 @@ public class clientSubscribe {
                         System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
                     };
                     break;
-                case 5:
+                case 4:
                     /**
                      *  A generic class will be used for case 5. Here the user can input either an integer or string, a common generic class will execute irrespective
                      *  of the user data type and fetch the results. In this case the user input is expected to be an integer or "200" in days for lead time and
@@ -311,7 +277,7 @@ public class clientSubscribe {
                             }
                     }
                     break;
-                case 6:
+                case 5:
                     System.out.println("#### Subscription topic is : ProductCostAndLeadTime");
                     try {
                     ProductCostAndLeadTimeGrpc.ProductCostAndLeadTimeBlockingStub stub5 = ProductCostAndLeadTimeGrpc.newBlockingStub(channel);
@@ -344,7 +310,7 @@ public class clientSubscribe {
                         System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
                     };
                 break;
-                case 7:
+                case 6:
 
                     /**
                      * Functionality is added to keep the channel open until explicitly requested by the user using case 7.
@@ -370,16 +336,87 @@ public class clientSubscribe {
             /**
              * This if conditions ensures the channel is shutdown and the progrom stops executing.
              */
-            if (option == 7) {
+            if (option == 6) {
                 break;
             }
+        }
+    }
+
+    public static void SubscribeRequest2(ManagedChannel channel2) {
+        while (true) {
+            System.out.println("\n");
+            System.out.println("########################################################");
+            System.out.println("Download Full Inventory List (yes or no): \n" +
+                    "Enter your choice: ");
+            Scanner inp5b = new Scanner(System.in);
+            String  InvList = inp5b.next();
+            /**
+             *  The SaveLocation variable ensures all the file writes are happening at the same path without any error.
+             *  The switch case below ensures a file is created with proper permission and the received information from the gRPC server is written to the file.
+             *  Each case implements a separate service. In case the file write is not successful, then the appropriate exception is raised.
+             */
+            String SaveLocation = "src/main/java/trafficStatistics/client/";
+            switch (InvList) {
+                case "yes":
+                    System.out.println("### Downloading FullInventoryList from Server...");
+                    try {
+                        FullInventoryListGrpc.FullInventoryListBlockingStub stub3 = FullInventoryListGrpc.newBlockingStub(channel2);
+                        stub3.subscribe(QueryFullInventoryList.newBuilder().build()).forEachRemaining(FullInventoryListResponse -> {
+                            try {
+                                File create = new File(SaveLocation + "Topic3_FullInventoryList.txt");
+                                create.setWritable(true);
+                                FileWriter SaveFile = new FileWriter(create);
+                                SaveFile.write(FullInventoryListResponse.getResult());
+                                SaveFile.close();
+                            } catch (IOException e) {
+                                //                    e.printStackTrace();
+                                System.out.println("");
+                                System.out.println("File write failed, if executing as JAR file this is expected.");
+                                System.out.println("");
+                            }
+                            ArrayList pPrint= new ArrayList(Arrays.asList(FullInventoryListResponse.getResult().split(",")));
+                            for(int i=0;i<pPrint.size();i++)
+                            {
+                                System.out.println(pPrint.get(i).toString()
+                                        .replace("["," ")
+                                        .replace ("]"," ")
+                                        .replace("{","")
+                                        .replace("}",""));
+                            }
+//                        System.out.println(FullInventoryListResponse.getResult());
+                        });
+                    }
+                    catch (StatusRuntimeException e) {
+                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Enter 'no' to shutdown");
+                    };
+                    break;
+                case "no":
+                    /**
+                     * Functionality is added to keep the channel open until explicitly requested by the user using case 7.
+                     */
+                    System.out.println("Shutting Down");
+                    channel2.shutdown();
+                    break;
+                default:
+                    try {
+                        throw new InvalidOption("Invalid Option Selected");
+                    }
+                    catch (InvalidOption e) {
+                        System.out.println(e.getMessage());
+                    }
+
+            }
+            /**
+             * This if conditions ensures the channel is shutdown and the progrom stops executing.
+             */
+            break;
         }
     }
     /**
      * This is a user defined exception. If the user enters an invalid input, then this exception is called and the message is sent back to the user.
      *
      * pre-condition : invalid input by the user.
-     * post-condition : An exception is generated and error back to the user indication that an invalid option was used.
+     * post-condition : An exception is generated and error back to the user indicating that an invalid option was used.
      */
     static class InvalidOption extends Exception {
         public InvalidOption(String s) {
@@ -422,6 +459,13 @@ public class clientSubscribe {
                 .usePlaintext()
                 .build();
         SubscribeRequest(channel);
+
+        ManagedChannel channel2 = ManagedChannelBuilder
+                .forAddress("localhost",50052)
+                .usePlaintext()
+                .build();
+        SubscribeRequest2(channel2);
+
 
         /** Explicit DownCasting
          * Here the child class serverActiveTopics extends from serverAllTopics, however downcasting was required to ensure the child class’s object was able to access the method of the parent class for the method displayAll().
