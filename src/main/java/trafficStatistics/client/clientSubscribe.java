@@ -100,7 +100,7 @@ public class clientSubscribe {
                     });
                     }
                     catch (StatusRuntimeException e) {
-                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
+                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 6 to shutdown");
                     };
                     break;
                 case 2:
@@ -139,7 +139,7 @@ public class clientSubscribe {
                     });
                     }
                     catch (StatusRuntimeException e) {
-                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
+                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 6 to shutdown");
                     };
                     break;
                 case 3:
@@ -172,7 +172,7 @@ public class clientSubscribe {
                     });
                     }
                     catch (StatusRuntimeException e) {
-                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
+                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 6 to shutdown");
                     };
                     break;
                 case 4:
@@ -224,7 +224,7 @@ public class clientSubscribe {
                             });
                             }
                             catch (StatusRuntimeException e) {
-                                System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
+                                System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 6 to shutdown");
                             };
                         break;
                         default:
@@ -263,7 +263,7 @@ public class clientSubscribe {
                             });
                             }
                             catch (StatusRuntimeException e) {
-                                System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
+                                System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 6 to shutdown");
                             };
                         break;
                         default:
@@ -305,7 +305,7 @@ public class clientSubscribe {
                     });
                     }
                     catch (StatusRuntimeException e) {
-                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 7 to shutdown");
+                        System.out.println("Problem communicating with gRPC Server,Start gRPC server before starting Client. Select option 6 to shutdown");
                     };
                 break;
                 case 6:
