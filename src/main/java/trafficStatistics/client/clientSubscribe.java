@@ -1,4 +1,5 @@
 package trafficStatistics.client;
+import java.sql.*;
 
 import com.proto.trafficStatistics.StatsRequest;
 import com.proto.trafficStatistics.subscribeServiceGrpc;
@@ -89,13 +90,22 @@ public class clientSubscribe {
                             Stream<String> TrafficStatStream = Stream.of(fileRead.readObject().toString());
                             TrafficStatStream.forEach(s -> System.out.printf(s.replace(",","\n")
                                     .replace("]","")));
+                            clientDB case1 = new clientDB();
+                            case1.dropDB("TrafficStats");
+                            case1.createDB("TrafficStats", "R13", "55Tbps");
+                            case1.createDB("TrafficStats", "R12", "65Tbps");
+                            case1.createDB("TrafficStats", "R11", "75Tbps");
+
+                            case1.showDB("TrafficStats");
+
                         } catch (IOException e) {
                             //e.printStackTrace();
                             System.out.println("");
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
-                        } catch (ClassNotFoundException e) {
+                        } catch (ClassNotFoundException | SQLException e) {
                             e.printStackTrace();
+
                         }
                     });
                     }
