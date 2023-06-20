@@ -90,12 +90,12 @@ public class clientSubscribe {
                             Stream<String> TrafficStatStream = Stream.of(fileRead.readObject().toString());
                             TrafficStatStream.forEach(s -> System.out.printf(s.replace(",","\n")
                                     .replace("]","")));
+                            System.out.println();
                             clientDB case1 = new clientDB();
                             case1.dropDB("TrafficStats");
                             case1.createDB("TrafficStats", "R13", "55Tbps");
                             case1.createDB("TrafficStats", "R12", "65Tbps");
                             case1.createDB("TrafficStats", "R11", "75Tbps");
-
                             case1.showDB("TrafficStats");
 
                         } catch (IOException e) {

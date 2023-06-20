@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class clientDB  {
     public void createDB(String TableName,String RouterName, String Stats) throws SQLException {
+        try {
             String connectionString = "jdbc:sqlite:src/main/java/trafficStatistics/client/clientDB.db";
-            try (Connection connection = DriverManager.getConnection(connectionString)) {
+            Connection connection = DriverManager.getConnection(connectionString);
                 System.out.println();
                 System.out.println("Database now connected.");
                 Statement cmd = connection.createStatement();
@@ -35,35 +36,52 @@ public class clientDB  {
                 } else {
                     System.out.println("Record Insertion failed");
                 }
-
-            } catch (SQLException e) {
-//                throw new RuntimeException(e);
+            } catch (SQLException e ) {
+            System.out.println("error code " + e.getErrorCode());
+            if(e.getErrorCode() == 0) {
+                System.out.println("jdbc connection error. Install sqlite if not installed already.");
+            } else {
                 System.out.println("Router name " +RouterName+ " already exist!Record update failed.Retry with unique Router name.");
+//                throw new RuntimeException(e);
+            }
             }
     }
     public void showDB(String TableName) throws SQLException {
-        String connectionString = "jdbc:sqlite:src/main/java/trafficStatistics/client/clientDB.db";
-        Connection connection = DriverManager.getConnection(connectionString);
-        Statement cmd = connection.createStatement();
-        ResultSet shTableCount = cmd.executeQuery("SELECT count(*) FROM "  + TableName);
-        shTableCount.next();
-        int count = shTableCount.getInt(1);
-        System.out.println("Number of rows " + count);
-
-        ResultSet shTable = cmd.executeQuery("SELECT * FROM "  + TableName);
-        System.out.println("RouterName  Stats");
-        while (shTable.next()) {
-            String RName = shTable.getString("RouterName");
-            String AggrStats = shTable.getString("Stats");
-            System.out.println(RName + "   " +AggrStats );
+        try {
+            String connectionString = "jdbc:sqlite:src/main/java/trafficStatistics/client/clientDB.db";
+            Connection connection = DriverManager.getConnection(connectionString);
+            Statement cmd = connection.createStatement();
+            ResultSet shTableCount = cmd.executeQuery("SELECT count(*) FROM "  + TableName);
+            shTableCount.next();
+            int count = shTableCount.getInt(1);
+            System.out.println("Number of rows " + count);
+            ResultSet shTable = cmd.executeQuery("SELECT * FROM "  + TableName);
+            System.out.println("RouterName  Stats");
+            while (shTable.next()) {
+                String RName = shTable.getString("RouterName");
+                String AggrStats = shTable.getString("Stats");
+                System.out.println(RName + "   " +AggrStats );
+            }
+        } catch (SQLException e ) {
+            System.out.println("error code " + e.getErrorCode());
+            if(e.getErrorCode() == 0) {
+                System.out.println("jdbc connection error. Install sqlite if not installed already.");
+            }
         }
     }
     public void dropDB(String TableName) throws SQLException {
-        String connectionString = "jdbc:sqlite:src/main/java/trafficStatistics/client/clientDB.db";
-        Connection connection = DriverManager.getConnection(connectionString);
-        Statement cmd = connection.createStatement();
-        String sql = "DROP TABLE " + TableName;
-        cmd.executeUpdate(sql);
-        cmd.close();
+        try {
+            String connectionString = "jdbc:sqlite:src/main/java/trafficStatistics/client/clientDB.db";
+            Connection connection = DriverManager.getConnection(connectionString);
+            Statement cmd = connection.createStatement();
+            String sql = "DROP TABLE " + TableName;
+            cmd.executeUpdate(sql);
+            cmd.close();
+        } catch (SQLException e ) {
+            System.out.println("error code " + e.getErrorCode());
+            if(e.getErrorCode() == 0) {
+                System.out.println("jdbc connection error. Install sqlite if not installed already.");
+            }
+        }
     }
 }
