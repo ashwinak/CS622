@@ -26,12 +26,12 @@ public class trafficServer  {
                 .build();
 
         server.start();
-        System.out.println("Server Started");
+        System.out.println("Starting Thread1 for port " + port);
         System.out.println("Listening on port: " + port);
 /**
  * A new thread is created to handle requests from port 50052 for full inventory request from client.  This thread will spawn
  * a new port 50052 and the attached services. The main thread will spawn  port 50051 and its attached services.
- *
+ * <p>
  *      * pre-condition : The new service Full inventory download is not spawned or attached to the new port.
  *      * post-condition : An exception is generated and error back to the user indicating that an invalid option was used.
  */
@@ -49,7 +49,7 @@ public class trafficServer  {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Server Started");
+                System.out.println("Starting Thread2 for port " + port);
                 System.out.println("Listening on port: " + port);
 
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {

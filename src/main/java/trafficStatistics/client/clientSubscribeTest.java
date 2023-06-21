@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.Socket;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -65,7 +66,7 @@ class clientSubscribeTest {
      * Test to check if the binary file is created.
      */
     void BinaryFileCheck() {
-        File file = new File("/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/src/main/java/trafficStatistics/client/Topic1_TrafficStats.dat");
+        File file = new File("/media/ashwinak/Ashwin-CBK/CS622-Advanced Programming Technique/Project/CS622/src/main/java/trafficStatistics/client/Topic1_TrafficStats.dat");
         assertTrue(file.exists());
     }
     public static boolean isPortOpen(String host, int port) {
@@ -98,6 +99,24 @@ class clientSubscribeTest {
         }
     }
 
-
+    /**
+     * Test to ensure SQlite is installed and JDBC is working fine.
+     */
+    @Test
+    public void testDriverManager() {
+        try {
+            String connectionString = "jdbc:sqlite:src/main/java/trafficStatistics/client/clientDB.db";
+            Connection connection = DriverManager.getConnection(connectionString);
+            Statement cmd = connection.createStatement();
+            ResultSet shTableCount = cmd.executeQuery("SELECT count(*) FROM TrafficStats");
+        } catch (SQLException e) {
+            System.out.println("error code " + e.getErrorCode());
+            if (e.getErrorCode() == 0) {
+                System.out.println("jdbc connection error. Install sqlite if not installed already.");
+            } else {
+                System.out.println("SQL Query Error");
+            }
+        }
+    }
 }
 

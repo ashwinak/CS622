@@ -7,7 +7,6 @@ import com.proto.trafficStatistics.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
-
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -91,13 +90,79 @@ public class clientSubscribe {
                             TrafficStatStream.forEach(s -> System.out.printf(s.replace(",","\n")
                                     .replace("]","")));
                             System.out.println();
+
+                            /**
+                             * The following code uses database to store the information received on this microservice.
+                             * A new instance of clientDB is created and the information is stored in the database using text manipulation by reading
+                             * from a temp csv file.
+                             *
+                             * Pre-condition : SQL lite must be installed and all relevant tables must be removed from DB before this code starts.
+                             * The savelocation must be accessible for file save to work.
+                             *
+                             * Post-condition : A new table is created with new information.
+                             *
+                             */
+
                             clientDB case1 = new clientDB();
                             case1.dropDB("TrafficStats");
-                            case1.createDB("TrafficStats", "R13", "55Tbps");
-                            case1.createDB("TrafficStats", "R12", "65Tbps");
-                            case1.createDB("TrafficStats", "R11", "75Tbps");
+                            case1.dropDB("SysInfo");
+
+                            File create2 = new File(SaveLocation + "Topic1_AggrStats.csv");
+                            create2.setWritable(true);
+                            FileWriter SaveFile2 = new FileWriter(create2);
+
+                            ArrayList pPrint= new ArrayList(Arrays.asList(statsResponse.getResult().split(",")));
+                            for(int i=0;i<pPrint.size();i++) {
+                                try {
+                                    SaveFile2.write(pPrint.get(i).toString()
+                                            .replace("["," ")
+                                            .replace ("]"," ")
+                                            .replace("{","")
+                                            .replace("}","")
+                                            .replace("=",",")
+                                            .replace(" ", ","));
+                                } catch (IOException e) {
+                                    System.out.println("");
+                                    System.out.println("File write failed, if executing as JAR file this is expected.");
+                                    System.out.println("");
+                                }
+                            }
+                            SaveFile2.close();
+
+                            /**
+                             * A second table is created for CPU statistics. The traffic stats table and CPU table is joined as necessary in the remaining part
+                             * of code for switch case 1.
+                             */
+
+                            Scanner read = new Scanner( new File(SaveLocation +"Topic1_AggrStats.csv"));
+                            read.useDelimiter(",");
+                            String RouterName,Stats;
+                            while (read.hasNext()) {
+                                RouterName = read.next();
+                                Stats = read.next();
+                                case1.createDB("TrafficStats", RouterName, Stats);
+                            }
+                            read.close();
                             case1.showDB("TrafficStats");
 
+                            File create3 = new File(SaveLocation + "Topic1_SysInfo.csv");
+                            create3.setWritable(true);
+                            FileWriter SaveFile3 = new FileWriter(create3);
+                            SaveFile3.write(",openconfig/interfaces/interface/state/r1/aggregate, 35%,");
+                            SaveFile3.write("openconfig/interfaces/interface/state/r2/aggregate, 45%");
+                            SaveFile3.close();
+
+                            Scanner read3 = new Scanner( new File(SaveLocation +"Topic1_SysInfo.csv"));
+                            read3.useDelimiter(",");
+                            String CPUStats;
+                            while (read3.hasNext()) {
+                                RouterName = read3.next();
+                                CPUStats = read3.next();
+                                case1.createDB2("SysInfo", RouterName, CPUStats);
+                            }
+                            read3.close();
+//                            case1.showDB("SysInfo");
+                            case1.joinTable("TrafficStats","SysInfo");
                         } catch (IOException e) {
                             //e.printStackTrace();
                             System.out.println("");
@@ -125,12 +190,10 @@ public class clientSubscribe {
                             SaveFile.write(SysHealthResponse.getResult());
                             SaveFile.close();
                         } catch (IOException e) {
-                            //                    e.printStackTrace();
                             System.out.println("");
                             System.out.println("File write failed, if executing as JAR file this is expected.");
                             System.out.println("");
                         }
-
                         /**
                          *  The ArrayList is used to store the received information into an array with delimiter as ','.
                          *  With replace pattern a pretty print functionality is enabled. This pretty print functionality
@@ -246,7 +309,7 @@ public class clientSubscribe {
                             }
                     }
                     System.out.println("Enter More Specific Queries in ProductCostAndLeadTime Topic: \n" +
-                            "5b) List products greater than N Cost in $ (150 $) :  \n");
+                            "5b) List products greater than specific Cost(150$) :  \n");
                     Scanner inp5b = new Scanner(System.in);
                     String  option5b = inp5b.next();
                     switch (option5b) {
